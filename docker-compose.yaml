@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: khalid
+      POSTGRES_PASSWORD: khalid
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: khalid@khalid.com
+      PGADMIN_DEFAULT_PASSWORD: khalid
+    ports:
+      - "80:80"
+
+  vscode:
+    image: codercom/code-server:latest
+    environment:
+      PASSWORD: "khalid"
+    volumes:
+      - ./vscode-data:/home/coder/project
+    ports:
+      - "8080:8080"
+
+  java:
+    image: openjdk:17-jdk-slim
+    volumes:
+      - ./java-app:/usr/src/app
+    working_dir: /usr/src/app
+    command: bash -c "while true; do sleep 1000; done"
+    
+  filebrowser:
+    image: filebrowser/filebrowser
+    volumes:
+      - ./filebrowser-data:/srv
+    ports:
+      - "8081:80"
