@@ -8,6 +8,7 @@ public class DatabaseConnector {
     private static final String USER = "khalid";
     private static final String PASSWORD = "khalid";
 
+    
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
